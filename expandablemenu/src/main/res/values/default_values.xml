@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- FilterItem -->
+    <dimen name="ef_filter_item_divider_margin">1dp</dimen>
+    <dimen name="ef_filter_item_default_padding">6dp</dimen>
+    <dimen name="ef_filter_item_default_margin_left">1dp</dimen>
+    <dimen name="ef_filter_item_default_margin_right">0dp</dimen>
+    <dimen name="ef_filter_item_default_margin_top">0dp</dimen>
+    <dimen name="ef_filter_item_default_margin_bottom">0dp</dimen>
+    <dimen name="ef_filter_item_default_text_size">16dp</dimen>
+    <dimen name="ef_button_stroke_width">1dp</dimen>
+    <dimen name="ef_button_radius">4dp</dimen>
+
+    <color name="ef_filter_item_default_text_color">#5A6366</color>
+    <color name="ef_filter_item_default_text_color_active">#FFFFFF</color>
+
+    <color name="ef_background_color">#FFFFFF</color>
+    <color name="ef_background_color_active">#315FDB</color>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true"> <!-- Selected -->
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/ef_button_stroke_width" android:color="@color/ef_background_color_active" />
+            <corners android:radius="@dimen/ef_button_radius" />
+            <solid android:color="@color/ef_background_color_active" />
+        </shape>
+    </item>
+    <item android:state_pressed="true"> <!-- Pressed -->
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/ef_button_stroke_width" android:color="@color/ef_background_color_active" />
+            <corners android:radius="@dimen/ef_button_radius" />
+            <solid android:color="@color/ef_background_color_active" />
+        </shape>
+    </item>
+    <item> <!-- Default -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ef_background_color" />
+            <stroke android:width="@dimen/ef_button_stroke_width" android:color="@color/ef_background_color" />
+            <corners android:radius="@dimen/ef_button_radius" />
+        </shape>
+    </item>
+</selector>

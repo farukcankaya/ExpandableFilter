@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="expandableFilterTextViewStyle" format="reference" />
+    <declare-styleable name="ExpandableFilterTextView">
+        <attr name="font" format="string" />
+        <attr name="android:padding" />
+        <attr name="android:layout_marginLeft" />
+        <attr name="android:layout_marginRight" />
+        <attr name="android:layout_marginTop" />
+        <attr name="android:layout_marginBottom" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="textColor" format="color" />
+        <attr name="android:background" />
+        <attr name="background" />
+        <attr name="android:text" />
+    </declare-styleable>
+
+    <attr name="expandableFilterDefaultFilterStyle" format="reference" />
+    <declare-styleable name="ExpandableFilterDefaultFilter">
+        <attr name="emoji" format="string" />
+        <attr name="label" format="string" />
+    </declare-styleable>
+
+    <attr name="expandableFilterExpandableFilterStyle" format="reference" />
+    <declare-styleable name="ExpandableFilter">
+        <attr name="items" format="reference" />
+        <attr name="itemPadding" format="dimension" />
+        <attr name="itemDividerMargin" format="dimension" />
+        <attr name="itemTextColor" format="color" />
+        <attr name="android:background" />
+        <attr name="background" />
+        <attr name="radius" format="dimension" />
+        <attr name="defaultTextColor" format="color" />
+        <attr name="activeTextColor" format="color" />
+        <attr name="defaultBackgroundColor" format="color" />
+        <attr name="activeBackgroundColor" format="color" />
+    </declare-styleable>
+</resources>
