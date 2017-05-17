@@ -19,5 +19,6 @@
         app:emojiFont="Coin.ttf"
         app:itemDividerMargin="2dp"
         app:itemPadding="8dp"
-        app:itemTextColor="@color/filter_text_color" />
+        app:itemTextColor="@color/filter_text_color"
+        app:labelFontSize="16sp" />
 </LinearLayout>

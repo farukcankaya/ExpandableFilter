@@ -20,7 +20,9 @@ public class Config {
     private int defaultBackgroundColor;
     private int activeBackgroundColor;
     private String emojiFont;
+    private int emojiFontSize;
     private String labelFont;
+    private int labelFontSize;
 
 
     private Config(ConfigBuilder configBuilder) {
@@ -38,6 +40,8 @@ public class Config {
         activeBackgroundColor = configBuilder.activeBackgroundColor;
         emojiFont = configBuilder.emojiFont;
         labelFont = configBuilder.labelFont;
+        emojiFontSize = configBuilder.emojiFontSize;
+        labelFontSize = configBuilder.labelFontSize;
     }
 
     public int getItemPadding() {
@@ -96,6 +100,14 @@ public class Config {
         return labelFont;
     }
 
+    public int getEmojiFontSize() {
+        return emojiFontSize;
+    }
+
+    public int getLabelFontSize() {
+        return labelFontSize;
+    }
+
     public void setItemPadding(int itemPadding) {
         this.itemPadding = itemPadding;
     }
@@ -152,6 +164,14 @@ public class Config {
         this.labelFont = labelFont;
     }
 
+    public void setEmojiFontSize(int emojiFontSize) {
+        this.emojiFontSize = emojiFontSize;
+    }
+
+    public void setLabelFontSize(int labelFontSize) {
+        this.labelFontSize = labelFontSize;
+    }
+
     public static class ConfigBuilder {
         private int itemPadding;
         private int itemPaddingLeft;
@@ -167,6 +187,8 @@ public class Config {
         private int activeBackgroundColor;
         private String emojiFont = null;
         private String labelFont = null;
+        private int emojiFontSize;
+        private int labelFontSize;
 
         /**
          * @param itemPadding in pixels
@@ -291,6 +313,24 @@ public class Config {
          */
         public ConfigBuilder setLabelFont(String labelFont) {
             this.labelFont = labelFont;
+            return this;
+        }
+
+        /**
+         * @param emojiFontSize in pixels
+         * @return
+         */
+        public ConfigBuilder setEmojiFontSize(int emojiFontSize) {
+            this.emojiFontSize = emojiFontSize;
+            return this;
+        }
+
+        /**
+         * @param labelFontSize in pixels
+         * @return
+         */
+        public ConfigBuilder setLabelFontSize(int labelFontSize) {
+            this.labelFontSize = labelFontSize;
             return this;
         }
 

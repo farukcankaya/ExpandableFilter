@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -62,6 +63,7 @@ public class DefaultFilterItem extends LinearLayout {
         mEmojiFilterItem.setDuplicateParentStateEnabled(true);
         mEmojiFilterItem.setText(mEmoji == null ? "" : mEmoji);
         mEmojiFilterItem.setFont(mConfig.getEmojiFont());
+        mEmojiFilterItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, mConfig.getEmojiFontSize());
         int paddingLeft = mEmojiFilterItem.getPaddingLeft();
         int paddingTop = mEmojiFilterItem.getPaddingTop();
         int paddingRight = mEmojiFilterItem.getPaddingRight();
@@ -82,6 +84,7 @@ public class DefaultFilterItem extends LinearLayout {
         mLabelFilterItem.setDuplicateParentStateEnabled(true);
         mLabelFilterItem.setText(mLabel == null ? "" : mLabel);
         mLabelFilterItem.setFont(mConfig.getLabelFont());
+        mLabelFilterItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, mConfig.getLabelFontSize());
         ViewCompat.setBackground(mLabelFilterItem, null);
         addView(mLabelFilterItem);
     }

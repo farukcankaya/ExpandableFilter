@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
@@ -52,6 +53,8 @@ public class ExpandableFilter extends LinearLayout {
     private int mItemDividerMargin;
     private String mEmojiFont = null;
     private String mLabelFont = null;
+    private int mEmojiFontSize;
+    private int mLabelFontSize;
     private ColorStateList mItemTextColor;
     private int mRadius;
     private int mDefaultTextColor;
@@ -63,6 +66,8 @@ public class ExpandableFilter extends LinearLayout {
     private int mDefaultPadding;
     private int mDefaultDividerMargin;
     private int mDefaultRadius;
+    private int mDefaultEmojiFontSize;
+    private int mDefaultLabelFontSize;
     private int mDefaultDefaultTextColor;
     private int mDefaultActiveTextColor;
     private int mDefaultDefaultBackgroundColor;
@@ -91,6 +96,9 @@ public class ExpandableFilter extends LinearLayout {
 
     private void initializeViews(AttributeSet attrs) {
         mDefaultPadding = (int) getResources().getDimension(R.dimen.ef_filter_item_default_padding);
+        mDefaultEmojiFontSize = getResources().getDimensionPixelSize(R.dimen.ef_filter_item_default_text_size);
+        mDefaultLabelFontSize = getResources().getDimensionPixelSize(R.dimen.ef_filter_item_default_text_size);
+        mDefaultPadding = (int) getResources().getDimension(R.dimen.ef_filter_item_default_padding);
         mDefaultDividerMargin = (int) getResources().getDimension(R.dimen.ef_filter_item_divider_margin);
         mDefaultRadius = (int) getResources().getDimension(R.dimen.ef_button_radius);
         mDefaultDefaultTextColor = ContextCompat.getColor(mContext, R.color.ef_filter_item_default_text_color);
@@ -108,6 +116,8 @@ public class ExpandableFilter extends LinearLayout {
         mItemPaddingBottom = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingBottom, mItemPadding);
         mItemDividerMargin = (int) a.getDimension(R.styleable.ExpandableFilter_itemDividerMargin, mDefaultDividerMargin);
         mItemTextColor = a.getColorStateList(R.styleable.ExpandableFilter_itemTextColor);
+        mEmojiFontSize = a.getDimensionPixelSize(R.styleable.ExpandableFilter_emojiFontSize, mDefaultEmojiFontSize);
+        mLabelFontSize = a.getDimensionPixelSize(R.styleable.ExpandableFilter_labelFontSize, mDefaultLabelFontSize);
         mRadius = (int) a.getDimension(R.styleable.ExpandableFilter_radius, mDefaultRadius);
         mDefaultTextColor = a.getColor(R.styleable.ExpandableFilter_defaultTextColor, 0);
         mActiveTextColor = a.getColor(R.styleable.ExpandableFilter_activeTextColor, 0);
@@ -141,6 +151,8 @@ public class ExpandableFilter extends LinearLayout {
                 .setItemDividerMargin(mItemDividerMargin)
                 .setItemTextColor(mItemTextColor)
                 .setRadius(mRadius)
+                .setEmojiFontSize(mEmojiFontSize)
+                .setLabelFontSize(mLabelFontSize)
                 .setDefaultTextColor(mDefaultTextColor)
                 .setActiveTextColor(mActiveTextColor)
                 .setDefaultBackgroundColor(mDefaultBackgroundColor)
@@ -196,6 +208,7 @@ public class ExpandableFilter extends LinearLayout {
             FilterItem filterItem = new FilterItem(mContext, mConfig);
             filterItem.setText(mItems.get(i));
             filterItem.setFont(mConfig.getEmojiFont());
+            filterItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, mConfig.getEmojiFontSize());
             if (i == (itemCount - 1)) {
                 Drawable drawable = ViewUtil.getBackground(mConfig.getActiveBackgroundColor(),
                         mConfig.getRadius(), ViewUtil.BACKGROUND_TYPE_RIGHT);
