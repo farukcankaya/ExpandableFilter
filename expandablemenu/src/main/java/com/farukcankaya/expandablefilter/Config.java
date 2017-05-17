@@ -8,6 +8,10 @@ import android.content.res.ColorStateList;
 
 public class Config {
     private final int itemPadding;
+    private final int itemPaddingLeft;
+    private final int itemPaddingTop;
+    private final int itemPaddingRight;
+    private final int itemPaddingBottom;
     private final int itemDividerMargin;
     private final ColorStateList itemTextColor;
     private final int radius;
@@ -18,6 +22,10 @@ public class Config {
 
     private Config(ConfigBuilder configBuilder) {
         itemPadding = configBuilder.itemPadding;
+        itemPaddingLeft = configBuilder.itemPaddingLeft;
+        itemPaddingTop = configBuilder.itemPaddingTop;
+        itemPaddingRight = configBuilder.itemPaddingRight;
+        itemPaddingBottom = configBuilder.itemPaddingBottom;
         itemDividerMargin = configBuilder.itemDividerMargin;
         itemTextColor = configBuilder.itemTextColor;
         radius = configBuilder.radius;
@@ -29,6 +37,22 @@ public class Config {
 
     public int getItemPadding() {
         return itemPadding;
+    }
+
+    public int getItemPaddingLeft() {
+        return itemPaddingLeft;
+    }
+
+    public int getItemPaddingTop() {
+        return itemPaddingTop;
+    }
+
+    public int getItemPaddingRight() {
+        return itemPaddingRight;
+    }
+
+    public int getItemPaddingBottom() {
+        return itemPaddingBottom;
     }
 
     public int getItemDividerMargin() {
@@ -61,6 +85,10 @@ public class Config {
 
     public static class ConfigBuilder {
         private int itemPadding;
+        private int itemPaddingLeft;
+        private int itemPaddingTop;
+        private int itemPaddingRight;
+        private int itemPaddingBottom;
         private int itemDividerMargin;
         private ColorStateList itemTextColor;
         private int radius;
@@ -75,6 +103,42 @@ public class Config {
          */
         public ConfigBuilder setItemPadding(int itemPadding) {
             this.itemPadding = itemPadding;
+            return this;
+        }
+
+        /**
+         * @param itemPaddingLeft in pixels
+         * @return
+         */
+        public ConfigBuilder setItemPaddingLeft(int itemPaddingLeft) {
+            this.itemPaddingLeft = itemPaddingLeft;
+            return this;
+        }
+
+        /**
+         * @param itemPaddingTop in pixels
+         * @return
+         */
+        public ConfigBuilder setItemPaddingTop(int itemPaddingTop) {
+            this.itemPaddingTop = itemPaddingTop;
+            return this;
+        }
+
+        /**
+         * @param itemPaddingRight in pixels
+         * @return
+         */
+        public ConfigBuilder setItemPaddingRight(int itemPaddingRight) {
+            this.itemPaddingRight = itemPaddingRight;
+            return this;
+        }
+
+        /**
+         * @param itemPaddingBottom in pixels
+         * @return
+         */
+        public ConfigBuilder setItemPaddingBottom(int itemPaddingBottom) {
+            this.itemPaddingBottom = itemPaddingBottom;
             return this;
         }
 

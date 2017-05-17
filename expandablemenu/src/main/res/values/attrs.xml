@@ -4,6 +4,10 @@
     <declare-styleable name="ExpandableFilterTextView">
         <attr name="font" format="string" />
         <attr name="android:padding" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingBottom" />
         <attr name="android:layout_marginLeft" />
         <attr name="android:layout_marginRight" />
         <attr name="android:layout_marginTop" />
@@ -26,6 +30,10 @@
     <declare-styleable name="ExpandableFilter">
         <attr name="items" format="reference" />
         <attr name="itemPadding" format="dimension" />
+        <attr name="itemPaddingLeft" format="dimension" />
+        <attr name="itemPaddingTop" format="dimension" />
+        <attr name="itemPaddingRight" format="dimension" />
+        <attr name="itemPaddingBottom" format="dimension" />
         <attr name="itemDividerMargin" format="dimension" />
         <attr name="itemTextColor" format="color" />
         <attr name="android:background" />

@@ -20,6 +20,10 @@ import android.widget.LinearLayout;
 
 public class FilterItem extends AppCompatTextView {
     private int mPadding;
+    private int mPaddingLeft;
+    private int mPaddingTop;
+    private int mPaddingRight;
+    private int mPaddingBottom;
     private int mMarginLeft;
     private int mMarginRight;
     private int mMarginTop;
@@ -71,6 +75,10 @@ public class FilterItem extends AppCompatTextView {
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandableFilterTextView);
         mPadding = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_padding, mDefaultPadding);
+        mPaddingLeft = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingLeft, mPadding);
+        mPaddingTop = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingTop, mPadding);
+        mPaddingRight = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingRight, mPadding);
+        mPaddingBottom = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingBottom, mPadding);
         mMarginLeft = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_layout_marginLeft, mDefaultMarginLeft);
         mMarginRight = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_layout_marginRight, mDefaultMarginRight);
         mMarginTop = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_layout_marginTop, mDefaultMarginTop);
@@ -88,17 +96,24 @@ public class FilterItem extends AppCompatTextView {
 
         buildConfig();
 
-        int tempMargin = mMarginLeft;
+        /**
+         * TODO: there should be better way to do this:
+         */
         if (ViewUtil.isRtl()) {
+            int tempMargin = mMarginLeft;
             mMarginLeft = mMarginRight;
             mMarginRight = tempMargin;
+
+            int tempPadding = mPaddingLeft;
+            mPaddingLeft = mPaddingRight;
+            mPaddingRight = tempPadding;
         }
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(mMarginLeft, mMarginTop, mMarginRight, mMarginBottom);
         setLayoutParams(layoutParams);
-        setPadding(mPadding, mPadding, mPadding, mPadding);
+        setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
         setGravity(Gravity.CENTER_VERTICAL);
         setTextColor(mTextColorStateList);
         setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
@@ -145,36 +160,35 @@ public class FilterItem extends AppCompatTextView {
 
             mMarginLeft = mConfig.getItemDividerMargin();
             mPadding = mConfig.getItemPadding();
+            mPaddingLeft = mConfig.getItemPaddingLeft();
+            mPaddingTop = mConfig.getItemPaddingTop();
+            mPaddingRight = mConfig.getItemPaddingRight();
+            mPaddingBottom = mConfig.getItemPaddingBottom();
 
             if (mConfig.getDefaultBackgroundColor() != 0 || mConfig.getActiveBackgroundColor() != 0) {
-                /*GradientDrawable gradientDrawable = (GradientDrawable) mBackground;
-                gradientDrawable.setCornerRadius(3);
-
-                int defaultColor = gradientDrawable.getColor().getDefaultColor();
-                defaultColor = mConfig.getDefaultBackgroundColor() != 0 ? mConfig.getDefaultBackgroundColor() : defaultColor;
-
-                int[] selectedState = {android.R.attr.state_selected};
-                int activeColor = mTextColorStateList.getColorForState(selectedState, defaultColor);
-                activeColor = mConfig.getActiveTextColor() != 0 ? mConfig.getActiveTextColor() : activeColor;
-
-                int[][] states = new int[][]{
-                        new int[]{android.R.attr.state_selected},
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{} // default color
-                };
-
-                int[] colors = new int[]{
-                        activeColor,
-                        activeColor,
-                        activeColor,
-                        defaultColor
-                };*/
+                //...
             }
         }
     }
 
     public int getPadding() {
         return mPadding;
+    }
+
+    public int getmPaddingLeft() {
+        return mPaddingLeft;
+    }
+
+    public int getmPaddingTop() {
+        return mPaddingTop;
+    }
+
+    public int getmPaddingRight() {
+        return mPaddingRight;
+    }
+
+    public int getmPaddingBottom() {
+        return mPaddingBottom;
     }
 
     /**

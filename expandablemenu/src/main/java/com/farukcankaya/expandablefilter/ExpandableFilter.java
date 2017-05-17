@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -48,6 +45,10 @@ public class ExpandableFilter extends LinearLayout {
 
     private Drawable mBackground;
     private int mItemPadding;
+    private int mItemPaddingLeft;
+    private int mItemPaddingTop;
+    private int mItemPaddingRight;
+    private int mItemPaddingBottom;
     private int mItemDividerMargin;
     private ColorStateList mItemTextColor;
     private int mRadius;
@@ -97,6 +98,10 @@ public class ExpandableFilter extends LinearLayout {
 
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
         mItemPadding = (int) a.getDimension(R.styleable.ExpandableFilter_itemPadding, mDefaultPadding);
+        mItemPaddingLeft = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingLeft, mItemPadding);
+        mItemPaddingTop = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingTop, mItemPadding);
+        mItemPaddingRight = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingRight, mItemPadding);
+        mItemPaddingBottom = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingBottom, mItemPadding);
         mItemDividerMargin = (int) a.getDimension(R.styleable.ExpandableFilter_itemDividerMargin, mDefaultDividerMargin);
         mItemTextColor = a.getColorStateList(R.styleable.ExpandableFilter_itemTextColor);
         mRadius = (int) a.getDimension(R.styleable.ExpandableFilter_radius, mDefaultRadius);
@@ -125,6 +130,10 @@ public class ExpandableFilter extends LinearLayout {
 
         mConfig = new Config.ConfigBuilder()
                 .setItemPadding(mItemPadding)
+                .setItemPaddingLeft(mItemPaddingLeft)
+                .setItemPaddingTop(mItemPaddingTop)
+                .setItemPaddingRight(mItemPaddingRight)
+                .setItemPaddingBottom(mItemPaddingBottom)
                 .setItemDividerMargin(mItemDividerMargin)
                 .setItemTextColor(mItemTextColor)
                 .setRadius(mRadius)
