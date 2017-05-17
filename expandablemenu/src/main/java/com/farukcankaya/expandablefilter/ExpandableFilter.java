@@ -50,6 +50,8 @@ public class ExpandableFilter extends LinearLayout {
     private int mItemPaddingRight;
     private int mItemPaddingBottom;
     private int mItemDividerMargin;
+    private String mEmojiFont = null;
+    private String mLabelFont = null;
     private ColorStateList mItemTextColor;
     private int mRadius;
     private int mDefaultTextColor;
@@ -97,6 +99,8 @@ public class ExpandableFilter extends LinearLayout {
         mDefaultActiveBackgroundColor = ContextCompat.getColor(mContext, R.color.ef_background_color_active);
 
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
+        mEmojiFont = a.getString(R.styleable.ExpandableFilter_emojiFont);
+        mLabelFont = a.getString(R.styleable.ExpandableFilter_labelFont);
         mItemPadding = (int) a.getDimension(R.styleable.ExpandableFilter_itemPadding, mDefaultPadding);
         mItemPaddingLeft = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingLeft, mItemPadding);
         mItemPaddingTop = (int) a.getDimension(R.styleable.ExpandableFilter_itemPaddingTop, mItemPadding);
@@ -141,6 +145,8 @@ public class ExpandableFilter extends LinearLayout {
                 .setActiveTextColor(mActiveTextColor)
                 .setDefaultBackgroundColor(mDefaultBackgroundColor)
                 .setActiveBackgroundColor(mActiveBackgroundColor)
+                .setEmojiFont(mEmojiFont)
+                .setLabelFont(mLabelFont)
                 .build();
     }
 
@@ -189,6 +195,7 @@ public class ExpandableFilter extends LinearLayout {
         for (int i = 0; i < itemCount; i++) {
             FilterItem filterItem = new FilterItem(mContext, mConfig);
             filterItem.setText(mItems.get(i));
+            filterItem.setFont(mConfig.getEmojiFont());
             if (i == (itemCount - 1)) {
                 Drawable drawable = ViewUtil.getBackground(mConfig.getActiveBackgroundColor(),
                         mConfig.getRadius(), ViewUtil.BACKGROUND_TYPE_RIGHT);
@@ -226,6 +233,32 @@ public class ExpandableFilter extends LinearLayout {
     public void setLabel(String label) {
         ((DefaultFilterItem) getChildAt(0)).setLabel(label);
         this.mLabel = label;
+    }
+
+    public String getEmojiFont() {
+        return mEmojiFont;
+    }
+
+    public void setEmojiFont(String emojiFont) {
+        this.mEmojiFont = emojiFont;
+        mConfig.setEmojiFont(emojiFont);
+        DefaultFilterItem defaultFilterItem = (DefaultFilterItem) getChildAt(0);
+        defaultFilterItem.getEmojiFilterItem().setFont(emojiFont);
+        for (int i = 1; i < getChildCount(); i++) {
+            FilterItem filterItem = (FilterItem) getChildAt(i);
+            filterItem.setFont(emojiFont);
+        }
+    }
+
+    public String getLabelFont() {
+        return mLabelFont;
+    }
+
+    public void setLabelFont(String labelFont) {
+        this.mLabelFont = labelFont;
+        mConfig.setLabelFont(labelFont);
+        DefaultFilterItem defaultFilterItem = (DefaultFilterItem) getChildAt(0);
+        defaultFilterItem.getLabelFilterItem().setFont(labelFont);
     }
 
     @Override

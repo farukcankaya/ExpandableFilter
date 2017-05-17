@@ -61,6 +61,7 @@ public class DefaultFilterItem extends LinearLayout {
         mEmojiFilterItem.setClickable(false);
         mEmojiFilterItem.setDuplicateParentStateEnabled(true);
         mEmojiFilterItem.setText(mEmoji == null ? "" : mEmoji);
+        mEmojiFilterItem.setFont(mConfig.getEmojiFont());
         int paddingLeft = mEmojiFilterItem.getPaddingLeft();
         int paddingTop = mEmojiFilterItem.getPaddingTop();
         int paddingRight = mEmojiFilterItem.getPaddingRight();
@@ -80,6 +81,7 @@ public class DefaultFilterItem extends LinearLayout {
         mLabelFilterItem.setClickable(false);
         mLabelFilterItem.setDuplicateParentStateEnabled(true);
         mLabelFilterItem.setText(mLabel == null ? "" : mLabel);
+        mLabelFilterItem.setFont(mConfig.getLabelFont());
         ViewCompat.setBackground(mLabelFilterItem, null);
         addView(mLabelFilterItem);
     }
@@ -92,6 +94,14 @@ public class DefaultFilterItem extends LinearLayout {
     public void setLabel(String label) {
         this.mLabel = label;
         mLabelFilterItem.setText(label);
+    }
+
+    public FilterItem getEmojiFilterItem() {
+        return mEmojiFilterItem;
+    }
+
+    public FilterItem getLabelFilterItem() {
+        return mLabelFilterItem;
     }
 
     public void setConfig(Config config) {

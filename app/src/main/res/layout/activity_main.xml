@@ -16,6 +16,7 @@
         app:activeBackgroundColor="#315FDB"
         app:defaultBackgroundColor="#FFFFFF"
         app:defaultTextColor="#f00"
+        app:emojiFont="Coin.ttf"
         app:itemDividerMargin="2dp"
         app:itemPadding="8dp"
         app:itemTextColor="@color/filter_text_color" />

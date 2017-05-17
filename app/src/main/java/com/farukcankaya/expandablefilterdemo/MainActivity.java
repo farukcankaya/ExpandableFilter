@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final ExpandableFilter expandableFilter = (ExpandableFilter) findViewById(R.id.expandableLayout);
         List<String> items = new ArrayList<>(0);
-        items.add("$");
-        items.add("$$");
-        items.add("$$$");
-        expandableFilter.setEmoji("$");
+        items.add("\ue902");
+        items.add("\ue900");
+        items.add("\ue901");
+        expandableFilter.setEmoji("\ue902");
         expandableFilter.setLabel("Price");
         expandableFilter.setItems(items);
         final LinearLayout ll = (LinearLayout) expandableFilter.getChildAt(0);

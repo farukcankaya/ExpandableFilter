@@ -28,6 +28,8 @@
 
     <attr name="expandableFilterExpandableFilterStyle" format="reference" />
     <declare-styleable name="ExpandableFilter">
+        <attr name="emojiFont" format="string" />
+        <attr name="labelFont" format="string" />
         <attr name="items" format="reference" />
         <attr name="itemPadding" format="dimension" />
         <attr name="itemPaddingLeft" format="dimension" />

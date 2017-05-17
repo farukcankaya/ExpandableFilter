@@ -3,6 +3,7 @@ package com.farukcankaya.expandablefilter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,7 @@ public class FilterItem extends AppCompatTextView {
     private int mMarginBottom;
     private ColorStateList mTextColorStateList;
     private float mTextSize;
+    private String mFont;
     private Drawable mBackground;
     private Config mConfig;
 
@@ -74,6 +76,7 @@ public class FilterItem extends AppCompatTextView {
         mDefaultTextSize = getResources().getDimensionPixelSize(R.dimen.ef_filter_item_default_text_size);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandableFilterTextView);
+        mFont = a.getString(R.styleable.ExpandableFilterTextView_font);
         mPadding = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_padding, mDefaultPadding);
         mPaddingLeft = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingLeft, mPadding);
         mPaddingTop = (int) a.getDimension(R.styleable.ExpandableFilterTextView_android_paddingTop, mPadding);
@@ -312,5 +315,20 @@ public class FilterItem extends AppCompatTextView {
         this.mConfig = config;
         requestLayout();
         invalidate();
+    }
+
+    public String getFont() {
+        return mFont;
+    }
+
+    public void setFont(String font) {
+        if (font == null) {
+            return;
+        }
+        this.mFont = font;
+        Typeface tf = FontCache.get(getContext(), font);
+        if (tf != null) {
+            setTypeface(tf);
+        }
     }
 }
