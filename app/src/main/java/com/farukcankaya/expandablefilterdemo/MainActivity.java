@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         expandableFilter.setEmoji("\ue902");
         expandableFilter.setLabel("Price");
         expandableFilter.setItems(items);
+        expandableFilter.setLabelFontSize(100);
         final LinearLayout ll = (LinearLayout) expandableFilter.getChildAt(0);
         ll.setOnClickListener(new View.OnClickListener() {
             @Override

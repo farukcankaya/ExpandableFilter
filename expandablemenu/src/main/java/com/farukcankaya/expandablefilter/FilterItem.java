@@ -119,7 +119,7 @@ public class FilterItem extends AppCompatTextView {
         setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
         setGravity(Gravity.CENTER_VERTICAL);
         setTextColor(mTextColorStateList);
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+        setTextSize(mTextSize);
         setClickable(true);
         ViewCompat.setBackground(this, mBackground);
     }
@@ -307,8 +307,7 @@ public class FilterItem extends AppCompatTextView {
      */
     public void setTextSize(float textSize) {
         this.mTextSize = textSize;
-        requestLayout();
-        invalidate();
+        super.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 
     public void setConfig(Config config) {

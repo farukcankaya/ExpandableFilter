@@ -274,6 +274,32 @@ public class ExpandableFilter extends LinearLayout {
         defaultFilterItem.getLabelFilterItem().setFont(labelFont);
     }
 
+    public int getEmojiFontSize() {
+        return mEmojiFontSize;
+    }
+
+    public void setEmojiFontSize(int emojiFontSize) {
+        this.mEmojiFontSize = emojiFontSize;
+        mConfig.setEmojiFontSize(emojiFontSize);
+        DefaultFilterItem defaultFilterItem = (DefaultFilterItem) getChildAt(0);
+        defaultFilterItem.getEmojiFilterItem().setTextSize(emojiFontSize);
+        for (int i = 1; i < getChildCount(); i++) {
+            FilterItem filterItem = (FilterItem) getChildAt(i);
+            filterItem.setTextSize(emojiFontSize);
+        }
+    }
+
+    public int getLabelFontSize() {
+        return mLabelFontSize;
+    }
+
+    public void setLabelFontSize(int labelFontSize) {
+        this.mLabelFontSize = labelFontSize;
+        mConfig.setLabelFontSize(labelFontSize);
+        DefaultFilterItem defaultFilterItem = (DefaultFilterItem) getChildAt(0);
+        defaultFilterItem.getLabelFilterItem().setTextSize(labelFontSize);
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
