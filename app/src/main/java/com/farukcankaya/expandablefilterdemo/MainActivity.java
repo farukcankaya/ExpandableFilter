@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         expandableFilter.setEmoji("\ue902");
         expandableFilter.setLabel("Price");
         expandableFilter.setItems(items);
-
         expandableFilter.setItemSelectListener(new ExpandableFilter.OnItemSelectListener() {
             @Override
             public void onSelected(int position, String text) {
@@ -37,5 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Delect", "position:" + position + " text:" + text);
             }
         });
+        expandableFilter.toggle();
+        expandableFilter.setItemSelect(1);
     }
 }

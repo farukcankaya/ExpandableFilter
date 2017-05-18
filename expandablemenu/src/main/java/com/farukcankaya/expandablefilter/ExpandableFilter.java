@@ -245,34 +245,48 @@ public class ExpandableFilter extends LinearLayout {
                 @Override
                 public void onClick(View v) {
                     Integer itemIndex = v.getId();
-                    boolean isSelected = mSelectedItems.contains(itemIndex);
-                    /**
-                     * remove oldest selected item
-                     */
-                    if (!isSelected && mMaxSelectableItemCount > 0 && getSelectedItemCount() >= mMaxSelectableItemCount) {
-                        Integer unSelectedItemIndex = mSelectedItems.remove(0);
-                        getChildAt(unSelectedItemIndex.intValue() + 1).setSelected(false);
-                        if (itemSelectListener != null) {
-                            itemSelectListener.onDelected(unSelectedItemIndex.intValue(), mItems.get(unSelectedItemIndex.intValue()));
-                        }
-                    }
-                    if (isSelected) {
-                        mSelectedItems.remove(itemIndex);
-                        if (itemSelectListener != null) {
-                            itemSelectListener.onDelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
-                        }
-                    } else {
-                        mSelectedItems.add(itemIndex);
-                        if (itemSelectListener != null) {
-                            itemSelectListener.onSelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
-                        }
-                    }
-
-                    v.setSelected(!isSelected);
+                    v.setSelected(!makeSelection(itemIndex));
                 }
             });
             addView(filterItem);
         }
+    }
+
+    public void setItemSelect(Integer itemIndex) {
+        if (itemIndex < 0 || itemIndex >= mItems.size()) {
+            return;
+        }
+        getChildAt(itemIndex + 1).setSelected(makeSelection(itemIndex));
+    }
+
+    /**
+     * @param itemIndex
+     * @return true if requested item is selected
+     */
+    private boolean makeSelection(Integer itemIndex) {
+        boolean isSelected = mSelectedItems.contains(itemIndex);
+        /**
+         * remove oldest selected item
+         */
+        if (!isSelected && mMaxSelectableItemCount > 0 && getSelectedItemCount() >= mMaxSelectableItemCount) {
+            Integer unSelectedItemIndex = mSelectedItems.remove(0);
+            getChildAt(unSelectedItemIndex.intValue() + 1).setSelected(false);
+            if (itemSelectListener != null) {
+                itemSelectListener.onDelected(unSelectedItemIndex.intValue(), mItems.get(unSelectedItemIndex.intValue()));
+            }
+        }
+        if (isSelected) {
+            mSelectedItems.remove(itemIndex);
+            if (itemSelectListener != null) {
+                itemSelectListener.onDelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
+            }
+        } else {
+            mSelectedItems.add(itemIndex);
+            if (itemSelectListener != null) {
+                itemSelectListener.onSelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
+            }
+        }
+        return isSelected;
     }
 
     public List<String> getItems() {
