@@ -83,7 +83,8 @@ public class ExpandableFilter extends LinearLayout {
     private Interpolator interpolator = new FastOutSlowInInterpolator();
     private ValueAnimator animator;
 
-    private OnExpansionUpdateListener listener;
+    private OnExpansionUpdateListener expansionUpdateListener;
+    private OnItemSelectListener itemSelectListener;
 
     public ExpandableFilter(Context context) {
         this(context, null);
@@ -219,6 +220,12 @@ public class ExpandableFilter extends LinearLayout {
         defaultFilterItem.setEmoji(mEmoji);
         defaultFilterItem.setLabel(mLabel);
         addView(defaultFilterItem, 0);
+        defaultFilterItem.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggle();
+            }
+        });
     }
 
     private void addFilterItems() {
@@ -245,11 +252,20 @@ public class ExpandableFilter extends LinearLayout {
                     if (!isSelected && mMaxSelectableItemCount > 0 && getSelectedItemCount() >= mMaxSelectableItemCount) {
                         Integer unSelectedItemIndex = mSelectedItems.remove(0);
                         getChildAt(unSelectedItemIndex.intValue() + 1).setSelected(false);
+                        if (itemSelectListener != null) {
+                            itemSelectListener.onDelected(unSelectedItemIndex.intValue(), mItems.get(unSelectedItemIndex.intValue()));
+                        }
                     }
                     if (isSelected) {
                         mSelectedItems.remove(itemIndex);
+                        if (itemSelectListener != null) {
+                            itemSelectListener.onDelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
+                        }
                     } else {
                         mSelectedItems.add(itemIndex);
+                        if (itemSelectListener != null) {
+                            itemSelectListener.onSelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
+                        }
                     }
 
                     v.setSelected(!isSelected);
@@ -570,8 +586,8 @@ public class ExpandableFilter extends LinearLayout {
         this.expansion = expansion;
         requestLayout();
 
-        if (listener != null) {
-            listener.onExpansionUpdate(expansion);
+        if (expansionUpdateListener != null) {
+            expansionUpdateListener.onExpansionUpdate(expansion);
         }
     }
 
@@ -620,12 +636,26 @@ public class ExpandableFilter extends LinearLayout {
         void onExpansionUpdate(float expansionFraction);
     }
 
-    public void setListener(OnExpansionUpdateListener listener) {
-        this.listener = listener;
+    public void setExpansionUpdateListener(OnExpansionUpdateListener listener) {
+        this.expansionUpdateListener = listener;
     }
 
-    public OnExpansionUpdateListener getListener() {
-        return listener;
+    public OnExpansionUpdateListener getExpansionUpdateListener() {
+        return expansionUpdateListener;
+    }
+
+    public interface OnItemSelectListener {
+        void onSelected(int position, String text);
+
+        void onDelected(int position, String text);
+    }
+
+    public OnItemSelectListener getItemSelectListener() {
+        return itemSelectListener;
+    }
+
+    public void setItemSelectListener(OnItemSelectListener itemSelectListener) {
+        this.itemSelectListener = itemSelectListener;
     }
 
     /**

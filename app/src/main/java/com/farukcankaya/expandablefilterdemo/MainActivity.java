@@ -2,6 +2,7 @@ package com.farukcankaya.expandablefilterdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -24,11 +25,16 @@ public class MainActivity extends AppCompatActivity {
         expandableFilter.setEmoji("\ue902");
         expandableFilter.setLabel("Price");
         expandableFilter.setItems(items);
-        final LinearLayout ll = (LinearLayout) expandableFilter.getChildAt(0);
-        ll.setOnClickListener(new View.OnClickListener() {
+
+        expandableFilter.setItemSelectListener(new ExpandableFilter.OnItemSelectListener() {
             @Override
-            public void onClick(View v) {
-                expandableFilter.toggle();
+            public void onSelected(int position, String text) {
+                Log.i("Select", "position:" + position + " text:" + text);
+            }
+
+            @Override
+            public void onDelected(int position, String text) {
+                Log.i("Delect", "position:" + position + " text:" + text);
             }
         });
     }
