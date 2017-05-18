@@ -34,8 +34,6 @@ public class ExpandableFilter extends LinearLayout {
     public static final String KEY_EXPANSION = "expansion";
     public static final String KEY_ITEMS = "items";
     public static final String KEY_ITEM_STATE = "item_states";
-    private static final int DEFAULT_DURATION = 300;
-    private int duration = DEFAULT_DURATION;
     private float expansion;
     private float defaultExpansion;
     private int state = IDLE;
@@ -65,6 +63,7 @@ public class ExpandableFilter extends LinearLayout {
     private int mActiveTextColor;
     private int mDefaultBackgroundColor;
     private int mActiveBackgroundColor;
+    private int mDuration;
 
     private Drawable mDefaultBackground;
     private int mDefaultPadding;
@@ -77,6 +76,7 @@ public class ExpandableFilter extends LinearLayout {
     private int mDefaultDefaultBackgroundColor;
     private int mDefaultActiveBackgroundColor;
     private int mDefaultMaxSelectableItemCount;
+    private int mDefaultDuration;
 
     private Config mConfig;
 
@@ -112,6 +112,7 @@ public class ExpandableFilter extends LinearLayout {
         mDefaultDefaultBackgroundColor = ContextCompat.getColor(mContext, R.color.ef_background_color);
         mDefaultActiveBackgroundColor = ContextCompat.getColor(mContext, R.color.ef_background_color_active);
         mDefaultMaxSelectableItemCount = getResources().getInteger(R.integer.ef_filter_max_selectable_items);
+        mDefaultDuration = getResources().getInteger(R.integer.ef_filter_expansion_duration);
 
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
         mEmojiFont = a.getString(R.styleable.ExpandableFilter_emojiFont);
@@ -132,6 +133,7 @@ public class ExpandableFilter extends LinearLayout {
         mActiveBackgroundColor = a.getColor(R.styleable.ExpandableFilter_activeBackgroundColor, mDefaultActiveBackgroundColor);
         mDefaultBackground = ViewUtil.getDefaultBackground(mDefaultBackgroundColor, mActiveBackgroundColor, mDefaultRadius);
         mMaxSelectableItemCount = a.getInteger(R.styleable.ExpandableFilter_maxSelectableItemCount, mDefaultMaxSelectableItemCount);
+        mDuration = a.getInteger(R.styleable.ExpandableFilter_duration, mDefaultDuration);
 
         mBackground = a.getDrawable(R.styleable.ExpandableFilter_android_background);
         Drawable appBackground = a.getDrawable(R.styleable.ExpandableFilter_background);
@@ -575,15 +577,18 @@ public class ExpandableFilter extends LinearLayout {
     }
 
     public int getDuration() {
-        return duration;
+        return mDuration;
     }
 
     public void setInterpolator(Interpolator interpolator) {
         this.interpolator = interpolator;
     }
 
+    /**
+     * @param duration in milliseconds
+     */
     public void setDuration(int duration) {
-        this.duration = duration;
+        this.mDuration = duration;
     }
 
     public float getExpansion() {
@@ -613,7 +618,7 @@ public class ExpandableFilter extends LinearLayout {
 
         animator = ValueAnimator.ofFloat(expansion, targetExpansion);
         animator.setInterpolator(interpolator);
-        animator.setDuration(duration);
+        animator.setDuration(mDuration);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

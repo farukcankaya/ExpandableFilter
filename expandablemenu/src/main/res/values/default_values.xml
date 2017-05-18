@@ -19,4 +19,6 @@
 
     <!-- 0 means all items can be selectable at the same time -->
     <integer name="ef_filter_max_selectable_items">0</integer>
+    <!-- Expansion duration in milliseconds -->
+    <integer name="ef_filter_expansion_duration">300</integer>
 </resources>

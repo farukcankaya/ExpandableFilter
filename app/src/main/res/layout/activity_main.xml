@@ -16,10 +16,11 @@
         app:activeBackgroundColor="#315FDB"
         app:defaultBackgroundColor="#FFFFFF"
         app:defaultTextColor="#f00"
+        app:duration="500"
         app:emojiFont="Coin.ttf"
         app:itemDividerMargin="1dp"
-        app:maxSelectableItemCount="1"
         app:itemPadding="8dp"
         app:itemTextColor="@color/filter_text_color"
-        app:labelFontSize="16sp" />
+        app:labelFontSize="16sp"
+        app:maxSelectableItemCount="1" />
 </LinearLayout>

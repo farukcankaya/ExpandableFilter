@@ -38,5 +38,6 @@ public class MainActivity extends AppCompatActivity {
         });
         expandableFilter.toggle();
         expandableFilter.setItemSelect(1);
+        expandableFilter.setDuration(800);
     }
 }
