@@ -32,6 +32,7 @@
         <attr name="labelFont" format="string" />
         <attr name="emojiFontSize" format="dimension" />
         <attr name="labelFontSize" format="dimension" />
+        <attr name="maxSelectableItemCount" format="integer" />
         <attr name="items" format="reference" />
         <attr name="itemPadding" format="dimension" />
         <attr name="itemPaddingLeft" format="dimension" />

@@ -16,4 +16,7 @@
 
     <color name="ef_background_color">#FFFFFF</color>
     <color name="ef_background_color_active">#315FDB</color>
+
+    <!-- 0 means all items can be selectable at the same time -->
+    <integer name="ef_filter_max_selectable_items">0</integer>
 </resources>

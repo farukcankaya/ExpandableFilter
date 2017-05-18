@@ -19,7 +19,6 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -47,6 +46,7 @@ public class ExpandableFilter extends LinearLayout {
     private String mLabel;
     private ArrayList<String> mItems = new ArrayList<>(0);
     private ArrayList<Integer> mSelectedItems = new ArrayList<>(0);
+    private int mMaxSelectableItemCount;
 
     private Drawable mBackground;
     private int mItemPadding;
@@ -76,6 +76,7 @@ public class ExpandableFilter extends LinearLayout {
     private int mDefaultActiveTextColor;
     private int mDefaultDefaultBackgroundColor;
     private int mDefaultActiveBackgroundColor;
+    private int mDefaultMaxSelectableItemCount;
 
     private Config mConfig;
 
@@ -109,6 +110,7 @@ public class ExpandableFilter extends LinearLayout {
         mDefaultActiveTextColor = ContextCompat.getColor(mContext, R.color.ef_filter_item_default_text_color_active);
         mDefaultDefaultBackgroundColor = ContextCompat.getColor(mContext, R.color.ef_background_color);
         mDefaultActiveBackgroundColor = ContextCompat.getColor(mContext, R.color.ef_background_color_active);
+        mDefaultMaxSelectableItemCount = getResources().getInteger(R.integer.ef_filter_max_selectable_items);
 
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
         mEmojiFont = a.getString(R.styleable.ExpandableFilter_emojiFont);
@@ -128,6 +130,7 @@ public class ExpandableFilter extends LinearLayout {
         mDefaultBackgroundColor = a.getColor(R.styleable.ExpandableFilter_defaultBackgroundColor, mDefaultDefaultBackgroundColor);
         mActiveBackgroundColor = a.getColor(R.styleable.ExpandableFilter_activeBackgroundColor, mDefaultActiveBackgroundColor);
         mDefaultBackground = ViewUtil.getDefaultBackground(mDefaultBackgroundColor, mActiveBackgroundColor, mDefaultRadius);
+        mMaxSelectableItemCount = a.getInteger(R.styleable.ExpandableFilter_maxSelectableItemCount, mDefaultMaxSelectableItemCount);
 
         mBackground = a.getDrawable(R.styleable.ExpandableFilter_android_background);
         Drawable appBackground = a.getDrawable(R.styleable.ExpandableFilter_background);
@@ -234,9 +237,21 @@ public class ExpandableFilter extends LinearLayout {
             filterItem.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int itemIndex = v.getId();
-                    boolean isSelected = mSelectedItems.get(itemIndex) == 1;
-                    mSelectedItems.set(itemIndex, isSelected ? 0 : 1);
+                    Integer itemIndex = v.getId();
+                    boolean isSelected = mSelectedItems.contains(itemIndex);
+                    /**
+                     * remove oldest selected item
+                     */
+                    if (!isSelected && mMaxSelectableItemCount > 0 && getSelectedItemCount() >= mMaxSelectableItemCount) {
+                        Integer unSelectedItemIndex = mSelectedItems.remove(0);
+                        getChildAt(unSelectedItemIndex.intValue() + 1).setSelected(false);
+                    }
+                    if (isSelected) {
+                        mSelectedItems.remove(itemIndex);
+                    } else {
+                        mSelectedItems.add(itemIndex);
+                    }
+
                     v.setSelected(!isSelected);
                 }
             });
@@ -246,6 +261,10 @@ public class ExpandableFilter extends LinearLayout {
 
     public List<String> getItems() {
         return mItems;
+    }
+
+    private int getSelectedItemCount() {
+        return mSelectedItems.size();
     }
 
     private List<String> getItemStringList(CharSequence[] items) {
@@ -260,9 +279,6 @@ public class ExpandableFilter extends LinearLayout {
         this.mItems.clear();
         this.mItems.addAll(items);
         this.mSelectedItems.clear();
-        for (String i : items) {
-            mSelectedItems.add(0);
-        }
     }
 
     public void setItems(List<String> items) {
@@ -367,8 +383,8 @@ public class ExpandableFilter extends LinearLayout {
         int childCount = getChildCount();
         for (int i = 0; i < childCount; ++i) {
             final View child = getChildAt(i);
-            if (mSelectedItems.size() == childCount - 1 && i > 0) {
-                child.setSelected(mSelectedItems.get(i - 1) == 1);
+            if (i > 0) {
+                child.setSelected(mSelectedItems.contains(Integer.valueOf(i - 1)));
             }
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
             final boolean useExcessSpace = lp.width == 0 && lp.weight > 0;
