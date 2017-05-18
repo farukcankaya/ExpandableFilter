@@ -19,6 +19,7 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class ExpandableFilter extends LinearLayout {
     private static final int COLLAPSING = 2;
     public static final String KEY_SUPER_STATE = "super_state";
     public static final String KEY_EXPANSION = "expansion";
+    public static final String KEY_ITEMS = "items";
+    public static final String KEY_ITEM_STATE = "item_states";
     private static final int DEFAULT_DURATION = 300;
     private int duration = DEFAULT_DURATION;
     private float expansion;
@@ -42,7 +45,8 @@ public class ExpandableFilter extends LinearLayout {
 
     private String mEmoji;
     private String mLabel;
-    private List<String> mItems = new ArrayList<>(0);
+    private ArrayList<String> mItems = new ArrayList<>(0);
+    private ArrayList<Integer> mSelectedItems = new ArrayList<>(0);
 
     private Drawable mBackground;
     private int mItemPadding;
@@ -130,11 +134,6 @@ public class ExpandableFilter extends LinearLayout {
         mBackground = appBackground == null ? mBackground : appBackground;
         mBackground = mBackground == null ? mDefaultBackground : mBackground;
         CharSequence[] items = a.getTextArray(R.styleable.ExpandableFilter_items);
-        if (items != null) {
-            for (CharSequence item : items) {
-                mItems.add(item.toString());
-            }
-        }
         a.recycle();
 
         a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilterDefaultFilter);
@@ -160,6 +159,10 @@ public class ExpandableFilter extends LinearLayout {
                 .setEmojiFont(mEmojiFont)
                 .setLabelFont(mLabelFont)
                 .build();
+
+        if (items != null) {
+            setItemStringList(getItemStringList(items));
+        }
     }
 
     @Override
@@ -167,6 +170,10 @@ public class ExpandableFilter extends LinearLayout {
         Parcelable superState = super.onSaveInstanceState();
         Bundle bundle = new Bundle();
         bundle.putFloat(KEY_EXPANSION, expansion);
+        if (isSaveEnabled()) {
+            bundle.putStringArrayList(KEY_ITEMS, mItems);
+            bundle.putIntegerArrayList(KEY_ITEM_STATE, mSelectedItems);
+        }
         bundle.putParcelable(KEY_SUPER_STATE, superState);
         return bundle;
     }
@@ -175,9 +182,18 @@ public class ExpandableFilter extends LinearLayout {
     protected void onRestoreInstanceState(Parcelable state) {
         Bundle bundle = (Bundle) state;
         expansion = bundle.getFloat(KEY_EXPANSION);
+        ArrayList<String> items = bundle.getStringArrayList(KEY_ITEMS);
+        if (items != null) {
+            mItems = items;
+        }
+        ArrayList<Integer> states = bundle.getIntegerArrayList(KEY_ITEM_STATE);
+        if (states != null) {
+            mSelectedItems = states;
+        }
         Parcelable superState = bundle.getParcelable(KEY_SUPER_STATE);
 
         super.onRestoreInstanceState(superState);
+        requestLayout();
     }
 
     @Override
@@ -206,6 +222,7 @@ public class ExpandableFilter extends LinearLayout {
         int itemCount = mItems.size();
         for (int i = 0; i < itemCount; i++) {
             FilterItem filterItem = new FilterItem(mContext, mConfig);
+            filterItem.setId(i);
             filterItem.setText(mItems.get(i));
             filterItem.setFont(mConfig.getEmojiFont());
             filterItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, mConfig.getEmojiFontSize());
@@ -214,6 +231,15 @@ public class ExpandableFilter extends LinearLayout {
                         mConfig.getRadius(), ViewUtil.BACKGROUND_TYPE_RIGHT);
                 ViewCompat.setBackground(filterItem, drawable);
             }
+            filterItem.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int itemIndex = v.getId();
+                    boolean isSelected = mSelectedItems.get(itemIndex) == 1;
+                    mSelectedItems.set(itemIndex, isSelected ? 0 : 1);
+                    v.setSelected(!isSelected);
+                }
+            });
             addView(filterItem);
         }
     }
@@ -222,9 +248,25 @@ public class ExpandableFilter extends LinearLayout {
         return mItems;
     }
 
-    public void setItems(List<String> items) {
+    private List<String> getItemStringList(CharSequence[] items) {
+        List<String> stringList = new ArrayList<>(items.length);
+        for (CharSequence item : items) {
+            stringList.add(item.toString());
+        }
+        return stringList;
+    }
+
+    private void setItemStringList(List<String> items) {
         this.mItems.clear();
         this.mItems.addAll(items);
+        this.mSelectedItems.clear();
+        for (String i : items) {
+            mSelectedItems.add(0);
+        }
+    }
+
+    public void setItems(List<String> items) {
+        setItemStringList(items);
         removeViews(1, getChildCount() - 1);
         addFilterItems();
         requestLayout();
@@ -322,8 +364,12 @@ public class ExpandableFilter extends LinearLayout {
         // See how wide everyone is. Also remember max height.
         selectedChildCount = 0;
         View firstChild = null;
-        for (int i = 0; i < getChildCount(); ++i) {
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; ++i) {
             final View child = getChildAt(i);
+            if (mSelectedItems.size() == childCount - 1 && i > 0) {
+                child.setSelected(mSelectedItems.get(i - 1) == 1);
+            }
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
             final boolean useExcessSpace = lp.width == 0 && lp.weight > 0;
             if (widthMode == MeasureSpec.EXACTLY && useExcessSpace) {
