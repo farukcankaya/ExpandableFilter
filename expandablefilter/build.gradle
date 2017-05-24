@@ -5,8 +5,8 @@ ext {
     bintrayName = 'ExpandableFilter'
 
     publishedGroupId = 'com.farukcankaya'
-    libraryName = 'expandableFilter'
-    artifact = 'expandableFilter'
+    libraryName = 'expandablefilter'
+    artifact = 'expandablefilter'
 
     libraryDescription = 'A simple library that creates an expandable filter with given items. Filter items can be collapsed/expanded. Also, it supports rtl views, changing color, text size, font family, etc...'
 
