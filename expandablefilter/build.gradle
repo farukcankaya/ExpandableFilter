@@ -60,5 +60,5 @@ dependencies {
     testCompile "junit:junit:${junit}"
 }
 
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+apply from: rootProject.file("installv1.gradle")
+apply from: rootProject.file("bintrayv1.gradle")
