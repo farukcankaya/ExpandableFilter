@@ -1,14 +1,38 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'ExpandableFilter'
+
+    publishedGroupId = 'com.farukcankaya'
+    libraryName = 'expandableFilter'
+    artifact = 'expandableFilter'
+
+    libraryDescription = 'A simple library that creates an expandable filter with given items. Filter items can be collapsed/expanded. Also, it supports rtl views, changing color, text size, font family, etc...'
+
+    siteUrl = 'https://github.com/farukcankaya/ExpandableFilter'
+    gitUrl = 'https://github.com/farukcankaya/ExpandableFilter.git'
+
+    libraryVersion = "${versionName}"
+
+    developerId = 'farukcankaya'
+    developerName = 'Faruk Cankaya'
+    developerEmail = 'farukcankayaaa@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion versionSdk
+    buildToolsVersion "${versionBuildTools}"
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versionMinSdk
+        targetSdkVersion versionTargetSdk
+        versionCode versionBuild
+        versionName "${versionName}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -21,11 +45,20 @@ android {
     }
 }
 
+// keep quiet javadoc task if it has an error
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    compile "com.android.support:appcompat-v7:${supportVersion}"
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${espresso}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:${junit}"
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

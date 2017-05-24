@@ -6,9 +6,25 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+    }
+
+    ext {
+        versionBuild = 1
+        versionName = "1.0.0"
+
+        versionSdk = 25
+        versionBuildTools = "25.0.1"
+        versionMinSdk = 15
+        versionTargetSdk = 25
+
+        supportVersion = "25.3.1"
+        junit = "4.12"
+        espresso = "2.2.2"
     }
 }
 
