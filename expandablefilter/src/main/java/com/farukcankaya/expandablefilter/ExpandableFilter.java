@@ -274,13 +274,13 @@ public class ExpandableFilter extends LinearLayout {
             Integer unSelectedItemIndex = mSelectedItems.remove(0);
             getChildAt(unSelectedItemIndex.intValue() + 1).setSelected(false);
             if (itemSelectListener != null) {
-                itemSelectListener.onDelected(unSelectedItemIndex.intValue(), mItems.get(unSelectedItemIndex.intValue()));
+                itemSelectListener.onDeselected(unSelectedItemIndex.intValue(), mItems.get(unSelectedItemIndex.intValue()));
             }
         }
         if (isSelected) {
             mSelectedItems.remove(itemIndex);
             if (itemSelectListener != null) {
-                itemSelectListener.onDelected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
+                itemSelectListener.onDeselected(itemIndex.intValue(), mItems.get(itemIndex.intValue()));
             }
         } else {
             mSelectedItems.add(itemIndex);
@@ -666,7 +666,7 @@ public class ExpandableFilter extends LinearLayout {
     public interface OnItemSelectListener {
         void onSelected(int position, String text);
 
-        void onDelected(int position, String text);
+        void onDeselected(int position, String text);
     }
 
     public OnItemSelectListener getItemSelectListener() {

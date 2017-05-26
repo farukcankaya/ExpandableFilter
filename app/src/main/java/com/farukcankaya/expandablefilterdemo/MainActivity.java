@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDelected(int position, String text) {
+            public void onDeselected(int position, String text) {
                 Log.i("Delect", "position:" + position + " text:" + text);
             }
         });
