@@ -254,13 +254,6 @@ public class ExpandableFilter extends LinearLayout {
         }
     }
 
-    public void setItemSelect(Integer itemIndex) {
-        if (itemIndex < 0 || itemIndex >= mItems.size()) {
-            return;
-        }
-        getChildAt(itemIndex + 1).setSelected(makeSelection(itemIndex));
-    }
-
     /**
      * @param itemIndex
      * @return true if requested item is selected
@@ -291,14 +284,6 @@ public class ExpandableFilter extends LinearLayout {
         return isSelected;
     }
 
-    public List<String> getItems() {
-        return mItems;
-    }
-
-    private int getSelectedItemCount() {
-        return mSelectedItems.size();
-    }
-
     private List<String> getItemStringList(CharSequence[] items) {
         List<String> stringList = new ArrayList<>(items.length);
         for (CharSequence item : items) {
@@ -311,6 +296,24 @@ public class ExpandableFilter extends LinearLayout {
         this.mItems.clear();
         this.mItems.addAll(items);
         this.mSelectedItems.clear();
+    }
+
+    /**
+     * @param itemIndex position on the list that is provided with {@link #setItems(List)}
+     */
+    public void selectItemAt(Integer itemIndex) {
+        if (itemIndex < 0 || itemIndex >= mItems.size()) {
+            return;
+        }
+        getChildAt(itemIndex + 1).setSelected(makeSelection(itemIndex));
+    }
+
+    public int getSelectedItemCount() {
+        return mSelectedItems.size();
+    }
+
+    public List<String> getItems() {
+        return mItems;
     }
 
     public void setItems(List<String> items) {

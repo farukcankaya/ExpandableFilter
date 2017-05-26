@@ -3,8 +3,6 @@ package com.farukcankaya.expandablefilterdemo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.farukcankaya.expandablefilter.ExpandableFilter;
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         expandableFilter.toggle();
-        expandableFilter.setItemSelect(1);
+        expandableFilter.selectItemAt(1);
         expandableFilter.setDuration(800);
     }
 }
