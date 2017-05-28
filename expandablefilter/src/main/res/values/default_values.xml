@@ -2,7 +2,7 @@
 <resources>
     <!-- FilterItem -->
     <dimen name="ef_filter_item_divider_margin">1dp</dimen>
-    <dimen name="ef_filter_item_default_padding">6dp</dimen>
+    <dimen name="ef_filter_item_default_padding">8dp</dimen>
     <dimen name="ef_filter_item_default_margin_left">1dp</dimen>
     <dimen name="ef_filter_item_default_margin_right">0dp</dimen>
     <dimen name="ef_filter_item_default_margin_top">0dp</dimen>
