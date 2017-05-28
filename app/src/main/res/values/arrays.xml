@@ -26,4 +26,16 @@
         <item>ORANGE</item>
         <item>BANANA</item>
     </string-array>
+
+    <string-array name="faster_filter_items">
+        <item>👌</item>
+        <item>👊</item>
+        <item>✊</item>
+    </string-array>
+
+    <string-array name="slower_filter_items">
+        <item>💕</item>
+        <item>🎁</item>
+        <item>💯</item>
+    </string-array>
 </resources>

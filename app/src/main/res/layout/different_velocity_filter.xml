@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#829ca7"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.farukcankaya.expandablefilter.ExpandableFilter
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:duration="100"
+            app:emoji="✋"
+            app:items="@array/faster_filter_items"
+            app:label="FASTER" />
+
+        <com.farukcankaya.expandablefilter.ExpandableFilter
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            app:duration="1200"
+            app:emoji="🔥"
+            app:items="@array/slower_filter_items"
+            app:label="SLOWER" />
+    </LinearLayout>
+</HorizontalScrollView>

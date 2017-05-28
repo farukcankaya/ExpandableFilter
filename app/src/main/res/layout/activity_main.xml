@@ -37,5 +37,15 @@
 
     <include layout="@layout/rectangle_filter" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Faster / Slower filter example:"
+        android:textColor="#c1c1c1"
+        android:textSize="16sp" />
+
+    <include layout="@layout/different_velocity_filter" />
+
 
 </LinearLayout>
