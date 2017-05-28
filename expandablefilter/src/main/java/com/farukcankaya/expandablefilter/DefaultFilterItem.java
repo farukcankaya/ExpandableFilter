@@ -34,7 +34,7 @@ public class DefaultFilterItem extends LinearLayout {
     }
 
     public DefaultFilterItem(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs, R.attr.expandableFilterDefaultFilterStyle);
+        super(context, attrs, R.attr.expandableFilterExpandableFilterStyle);
         initializeViews(context, attrs);
     }
 
@@ -45,9 +45,9 @@ public class DefaultFilterItem extends LinearLayout {
 
     private void initializeViews(Context context, AttributeSet attrs) {
         mContext = context;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandableFilterDefaultFilter);
-        mEmoji = a.getString(R.styleable.ExpandableFilterDefaultFilter_emoji);
-        mLabel = a.getString(R.styleable.ExpandableFilterDefaultFilter_label);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
+        mEmoji = a.getString(R.styleable.ExpandableFilter_emoji);
+        mLabel = a.getString(R.styleable.ExpandableFilter_label);
         a.recycle();
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,

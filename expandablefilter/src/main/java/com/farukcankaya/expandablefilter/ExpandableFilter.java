@@ -142,9 +142,9 @@ public class ExpandableFilter extends LinearLayout {
         CharSequence[] items = a.getTextArray(R.styleable.ExpandableFilter_items);
         a.recycle();
 
-        a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilterDefaultFilter);
-        mEmoji = a.getString(R.styleable.ExpandableFilterDefaultFilter_emoji);
-        mLabel = a.getString(R.styleable.ExpandableFilterDefaultFilter_label);
+        a = mContext.obtainStyledAttributes(attrs, R.styleable.ExpandableFilter);
+        mEmoji = a.getString(R.styleable.ExpandableFilter_emoji);
+        mLabel = a.getString(R.styleable.ExpandableFilter_label);
         a.recycle();
 
         mConfig = new Config.ConfigBuilder()
