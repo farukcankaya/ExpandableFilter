@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="filter_items">
-        <item>asd</item>
-        <item>axx</item>
-        <item>yty</item>
+    <string-array name="price_filter_items">
+        <item>$</item>
+        <item>$$</item>
+        <item>$$$</item>
+        <item>$$$$</item>
+    </string-array>
+
+    <string-array name="distance_filter_items">
+        <item>&#xf206;</item>
+        <item>&#xf1b9;</item>
+        <item>&#xf072;</item>
+        <item>&#xf135;</item>
     </string-array>
 </resources>

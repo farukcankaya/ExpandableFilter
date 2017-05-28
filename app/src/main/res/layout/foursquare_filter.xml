@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2D6AED"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.farukcankaya.expandablefilter.ExpandableFilter
+            android:id="@+id/priceFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:activeBackgroundColor="#FFFFFF"
+            app:activeTextColor="#5080EA"
+            app:defaultBackgroundColor="#5080EA"
+            app:defaultTextColor="#FFFFFF"
+            app:emoji="$"
+            app:emojiFont="Roboto-Regular.ttf"
+            app:itemPadding="8dp"
+            app:items="@array/price_filter_items"
+            app:label="PRICE" />
+
+        <com.farukcankaya.expandablefilter.ExpandableFilter
+            android:id="@+id/openingFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            app:activeBackgroundColor="#FFFFFF"
+            app:activeTextColor="#5080EA"
+            app:defaultBackgroundColor="#5080EA"
+            app:defaultTextColor="#FFFFFF"
+            app:emoji="&#xf017;"
+            app:emojiFont="fontawesome-webfont.ttf"
+            app:itemPadding="8dp"
+            app:label="OPEN NOW" />
+
+        <com.farukcankaya.expandablefilter.ExpandableFilter
+            android:id="@+id/distanceFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            app:activeBackgroundColor="#FFFFFF"
+            app:activeTextColor="#5080EA"
+            app:defaultBackgroundColor="#5080EA"
+            app:defaultTextColor="#FFFFFF"
+            app:emoji="&#xf041;"
+            app:emojiFont="fontawesome-webfont.ttf"
+            app:itemPadding="8dp"
+            app:items="@array/distance_filter_items"
+            app:label="DISTANCE"
+            app:maxSelectableItemCount="1" />
+    </LinearLayout>
+</HorizontalScrollView>
