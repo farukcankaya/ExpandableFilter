@@ -16,4 +16,17 @@
         android:textSize="16sp" />
 
     <include layout="@layout/foursquare_filter" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Circle filter example Closed / Opened"
+        android:textColor="#c1c1c1"
+        android:textSize="16sp" />
+
+    <include layout="@layout/circle_filter" />
+
+
 </LinearLayout>

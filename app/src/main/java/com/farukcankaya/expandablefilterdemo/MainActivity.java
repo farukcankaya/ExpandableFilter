@@ -11,19 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ExpandableFilter.OnItemSelectListener {
-    ExpandableFilter priceFilter, distanceFilter, openingFilter;
+    ExpandableFilter priceFilter, distanceFilter, openingFilter, circleFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Foursquare like filter
         priceFilter = (ExpandableFilter) findViewById(R.id.priceFilter);
         distanceFilter = (ExpandableFilter) findViewById(R.id.distanceFilter);
         openingFilter = (ExpandableFilter) findViewById(R.id.openingFilter);
-
         priceFilter.setItemSelectListener(this);
         distanceFilter.setItemSelectListener(this);
         openingFilter.setItemSelectListener(this);
+
+        // Circle Filter
+        circleFilter = (ExpandableFilter) findViewById(R.id.circleFilter);
+        circleFilter.selectItemAt(0);
+        circleFilter.toggle(); // open for the beginning
     }
 
     @Override

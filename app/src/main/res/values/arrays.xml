@@ -13,4 +13,11 @@
         <item>&#xf072;</item>
         <item>&#xf135;</item>
     </string-array>
+
+    <string-array name="circle_filter_items">
+        <item>&#xf0d5;</item>
+        <item>&#xf082;</item>
+        <item>&#xf16d;</item>
+        <item>&#xf099;</item>
+    </string-array>
 </resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ff8c00"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <com.farukcankaya.expandablefilter.ExpandableFilter
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:activeBackgroundColor="#431e00"
+        app:activeTextColor="#ffffff"
+        app:defaultBackgroundColor="#fffb00"
+        app:defaultTextColor="#431e00"
+        app:emoji="&#xf0ca;"
+        app:emojiFont="fontawesome-webfont.ttf"
+        app:emojiFontSize="18sp"
+        app:itemPaddingBottom="12dp"
+        app:itemPaddingTop="12dp"
+        app:labelFont="fontawesome-webfont.ttf"
+        app:labelFontSize="18sp"
+        app:radius="60dp" />
+
+    <com.farukcankaya.expandablefilter.ExpandableFilter
+        android:id="@+id/circleFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        app:activeBackgroundColor="#431e00"
+        app:activeTextColor="#ffffff"
+        app:defaultBackgroundColor="#fffb00"
+        app:defaultTextColor="#431e00"
+        app:emoji="&#xf0ca;"
+        app:emojiFont="fontawesome-webfont.ttf"
+        app:emojiFontSize="18sp"
+        app:itemPaddingBottom="12dp"
+        app:itemPaddingTop="12dp"
+        app:items="@array/circle_filter_items"
+        app:labelFont="fontawesome-webfont.ttf"
+        app:labelFontSize="18sp"
+        app:radius="60dp" />
+
+</LinearLayout>
