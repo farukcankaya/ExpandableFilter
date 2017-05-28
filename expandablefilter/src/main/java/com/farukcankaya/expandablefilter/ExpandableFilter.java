@@ -134,7 +134,7 @@ public class ExpandableFilter extends LinearLayout {
         mActiveTextColor = a.getColor(R.styleable.ExpandableFilter_activeTextColor, 0);
         mDefaultBackgroundColor = a.getColor(R.styleable.ExpandableFilter_defaultBackgroundColor, mDefaultDefaultBackgroundColor);
         mActiveBackgroundColor = a.getColor(R.styleable.ExpandableFilter_activeBackgroundColor, mDefaultActiveBackgroundColor);
-        mDefaultBackground = ViewUtil.getDefaultBackground(mDefaultBackgroundColor, mActiveBackgroundColor, mDefaultRadius);
+        mDefaultBackground = ViewUtil.getDefaultBackground(mDefaultBackgroundColor, mActiveBackgroundColor, mRadius);
         mMaxSelectableItemCount = a.getInteger(R.styleable.ExpandableFilter_maxSelectableItemCount, mDefaultMaxSelectableItemCount);
         mDuration = a.getInteger(R.styleable.ExpandableFilter_duration, mDefaultDuration);
 
