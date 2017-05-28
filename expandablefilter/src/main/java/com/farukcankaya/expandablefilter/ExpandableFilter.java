@@ -34,11 +34,14 @@ public class ExpandableFilter extends LinearLayout {
     public static final String KEY_EXPANSION = "expansion";
     public static final String KEY_ITEMS = "items";
     public static final String KEY_ITEM_STATE = "item_states";
+    public static final String KEY_DEFAULT_ITEM_STATE = "default_item_states";
     private float expansion;
     private float defaultExpansion;
     private int state = IDLE;
     private int selectedChildCount;
     private Context mContext;
+
+    private boolean mIsDefaultItemSelected;
 
     private String mEmoji;
     private String mLabel;
@@ -179,6 +182,7 @@ public class ExpandableFilter extends LinearLayout {
         if (isSaveEnabled()) {
             bundle.putStringArrayList(KEY_ITEMS, mItems);
             bundle.putIntegerArrayList(KEY_ITEM_STATE, mSelectedItems);
+            bundle.putBoolean(KEY_DEFAULT_ITEM_STATE, mIsDefaultItemSelected);
         }
         bundle.putParcelable(KEY_SUPER_STATE, superState);
         return bundle;
@@ -188,6 +192,7 @@ public class ExpandableFilter extends LinearLayout {
     protected void onRestoreInstanceState(Parcelable state) {
         Bundle bundle = (Bundle) state;
         expansion = bundle.getFloat(KEY_EXPANSION);
+        mIsDefaultItemSelected = bundle.getBoolean(KEY_DEFAULT_ITEM_STATE, false);
         ArrayList<String> items = bundle.getStringArrayList(KEY_ITEMS);
         if (items != null) {
             mItems = items;
@@ -218,14 +223,27 @@ public class ExpandableFilter extends LinearLayout {
     }
 
     private void addDefaultFilterItem() {
-        DefaultFilterItem defaultFilterItem = new DefaultFilterItem(mContext, mConfig);
+        final DefaultFilterItem defaultFilterItem = new DefaultFilterItem(mContext, mConfig);
         defaultFilterItem.setEmoji(mEmoji);
         defaultFilterItem.setLabel(mLabel);
         addView(defaultFilterItem, 0);
         defaultFilterItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggle();
+                if (getItems().size() == 0) {
+                    mIsDefaultItemSelected = !mIsDefaultItemSelected;
+                    defaultFilterItem.setSelected(mIsDefaultItemSelected);
+
+                    if (itemSelectListener != null) {
+                        if (mIsDefaultItemSelected) {
+                            itemSelectListener.onSelected(-1, String.valueOf(mEmoji) + String.valueOf(mLabel));
+                        } else {
+                            itemSelectListener.onDeselected(-1, String.valueOf(mEmoji) + String.valueOf(mLabel));
+                        }
+                    }
+                } else {
+                    toggle();
+                }
             }
         });
     }
@@ -393,6 +411,14 @@ public class ExpandableFilter extends LinearLayout {
         defaultFilterItem.getLabelFilterItem().setTextSize(labelFontSize);
     }
 
+    public boolean isDefaultItemSelected() {
+        return mIsDefaultItemSelected;
+    }
+
+    public void setDefaultItemSelected(boolean defaultItemSelected) {
+        mIsDefaultItemSelected = defaultItemSelected;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -501,8 +527,8 @@ public class ExpandableFilter extends LinearLayout {
                         mConfig.getActiveBackgroundColor(), mConfig.getRadius());
             }
             ViewCompat.setBackground(firstChild, backgroundDrawable);
-            boolean sta = isThereSelectedItem() && !isExpanded();
-            firstChild.setSelected(sta);
+            boolean isDefaultItemSelected = getItems().size() == 0 ? mIsDefaultItemSelected : isThereSelectedItem() && !isExpanded();
+            firstChild.setSelected(isDefaultItemSelected);
         }
     }
 
