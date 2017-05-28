@@ -17,7 +17,6 @@
 
     <include layout="@layout/foursquare_filter" />
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +26,16 @@
         android:textSize="16sp" />
 
     <include layout="@layout/circle_filter" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Rectangle filter example"
+        android:textColor="#c1c1c1"
+        android:textSize="16sp" />
+
+    <include layout="@layout/rectangle_filter" />
 
 
 </LinearLayout>

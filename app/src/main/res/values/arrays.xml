@@ -20,4 +20,10 @@
         <item>&#xf16d;</item>
         <item>&#xf099;</item>
     </string-array>
+
+    <string-array name="rectangle_filter_items">
+        <item>APPLE</item>
+        <item>ORANGE</item>
+        <item>BANANA</item>
+    </string-array>
 </resources>

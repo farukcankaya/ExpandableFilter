@@ -7,5 +7,5 @@
     <!-- Pressed -->
     <item android:color="#FFFFFF" android:state_pressed="true" />
     <!-- Default -->
-    <item android:color="#5A6366" />
+    <item android:color="#ff6969" />
 </selector>
